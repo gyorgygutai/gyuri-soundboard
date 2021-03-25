@@ -1,30 +1,46 @@
 <script>
-	export let name;
+	import PlayButton from "./PlayButton.svelte";
+
+	const handleClick = () => {
+		console.log("TODO");
+	};
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+<main class="container">
+	<PlayButton on:click={handleClick} />
 </main>
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
+	:global(*, *::after, *::before) {
+		box-sizing: inherit;
 	}
 
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
+	:global(html) {
+		font-size: 62.5%;
 	}
 
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
+	:global(body) {
+		margin: 0;
+		font-size: 2rem;
+		box-sizing: border-box;
+		color: rgba(0, 0, 0, 0.9);
+		background-color: #fff;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+			Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+			"Segoe UI Symbol";
+	}
+
+	@media (prefers-color-scheme: dark) {
+		:global(body) {
+			color: rgba(255, 255, 255, 0.9);
+			background-color: rgba(0, 0, 0, 0.9);
 		}
+	}
+
+	.container {
+		height: 90vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 </style>
