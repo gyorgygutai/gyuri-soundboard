@@ -1,13 +1,50 @@
 <script>
 	import PlayButton from "./PlayButton.svelte";
 
+	const sounds = [
+		"./audio/igen.mp3",
+		"./audio/hohoho.mp3",
+		"./audio/ohoho.mp3",
+		"./audio/coppki.mp3",
+		"./audio/tevagyaz.mp3",
+	];
+
+	let isPlaying = false;
+	let audioElement;
+
+	const pickRandomSound = (currentSound) =>
+		sounds.filter((sound) => sound !== currentSound)[
+			Math.floor(Math.random() * sounds.length)
+		];
+
+	const queueNextSound = () => {
+		audioElement = new Audio(pickRandomSound(audioElement?.src));
+		audioElement.preload = true;
+	};
+
+	queueNextSound();
+
 	const handleClick = () => {
-		console.log("TODO");
+		audioElement.pause();
+		audioElement.play();
+
+		audioElement.addEventListener("play", () => {
+			isPlaying = true;
+		});
+
+		audioElement.addEventListener("playing", () => {
+			isPlaying = true;
+		});
+
+		audioElement.addEventListener("ended", () => {
+			isPlaying = false;
+			queueNextSound();
+		});
 	};
 </script>
 
 <main class="container">
-	<PlayButton on:click={handleClick} />
+	<PlayButton disabled={isPlaying} on:click={handleClick} />
 </main>
 
 <style>

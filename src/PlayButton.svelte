@@ -1,4 +1,8 @@
-<button on:click class="button" title="Play a sound">
+<script>
+    export let disabled;
+</script>
+
+<button on:click {disabled} class="button" title="Play a sound">
     <svg
         class="icon"
         width="24"
@@ -23,21 +27,26 @@
         color: #fff;
         cursor: pointer;
         border-radius: 20px;
-        transition: opacity, transform 0.3s;
+        transition: opacity, transform 0.45s;
         background-color: rgb(28, 175, 246);
         box-shadow: inset 0px -6px 0px 0px rgba(27, 117, 161, 0.9);
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-
-    .button:hover {
-        transform: scale(1.05);
+        opacity: 0.8;
     }
 
     .button:active {
-        opacity: 0.8;
-        transform: scale(0.95);
+        background-color: rgba(28, 175, 246, 0.9);
+    }
+
+    .button:not(:disabled):hover {
+        transform: scale(1.05);
+    }
+
+    button:disabled {
+        opacity: 0.1;
+        transform: scale(1.3) translateY(-25px);
     }
 
     .icon {
